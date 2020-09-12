@@ -16,8 +16,17 @@
 <body>
     <div id="index"></div>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('assets/js/feather-icons/feather.min.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script>
+        $(document).on('click','.navbar-toggler-icon',function(){
+            $('#sidebar').toggleClass("active");
+        });
 
+        window.onload = function () {
+            const w = window.innerWidth;
+            if (w < 768) {
+                document.getElementById('sidebar').classList.remove('active');
+            }
+        };
+    </script>
 </body>
 </html>

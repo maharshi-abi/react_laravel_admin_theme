@@ -3,8 +3,6 @@ import { createStore,combineReducers,applyMiddleware,compose } from "redux";
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import ReactDOM from 'react-dom';
-import Login from './components/Login/Login';
-import App from './components/Layout/App';
 import LoginModule from './components/Login/Reducer/Data';
 import axios from "axios";
 import Header from "./components/Layout/Menu";

@@ -1,5 +1,6 @@
 import React ,{Component} from 'react';
 import { Link } from "react-router-dom";
+import {connect} from "react-redux";
 import '../../../../public/assets/css/bootstrap.css';
 import '../../../../public/assets/vendors/perfect-scrollbar/perfect-scrollbar.css';
 import '../../../../public/assets/css/app.css';
@@ -7,6 +8,10 @@ import '../../../../public/assets/vendors/perfect-scrollbar/perfect-scrollbar.mi
 import '../../../../public/assets/js/app.js';
 import logo from '../../../../public/assets/images/logo.svg'
 import avatar from '../../../../public/assets/images/avatar/avatar-s-1.png'
+
+const DashboardIcon = require('react-feather/dist/icons/home').default;
+const UserIcon = require('react-feather/dist/icons/user').default;
+const LogoutIcon = require('react-feather/dist/icons/log-out').default;
 
 class App extends Component{
     constructor(props) {
@@ -27,7 +32,7 @@ class App extends Component{
 
                                     <li className="sidebar-item active ">
                                         <a href="#" className='sidebar-link'>
-                                            <i data-feather="home" width="20"/>
+                                            <DashboardIcon/>
                                             <span>Dashboard</span>
                                         </a>
                                     </li>
@@ -56,13 +61,16 @@ class App extends Component{
                                             <div className="avatar mr-1">
                                                 <img src={avatar} alt={"avatar"}/>
                                             </div>
-                                            <div className="d-none d-md-block d-lg-inline-block">Hi, Saugi</div>
+                                            <div className="d-none d-md-block d-lg-inline-block">{this.props.username}</div>
                                         </a>
                                         <div className="dropdown-menu dropdown-menu-right">
                                             <a className="dropdown-item" href="#">
-                                                <i data-feather="user"/> Account</a>
+                                                <UserIcon size={20}/> Profile
+                                            </a>
                                             <div className="dropdown-divider"/>
-                                            <Link to="/logout" className="dropdown-item"><i data-feather="log-out"/>Logout</Link>
+                                            <Link to="/logout" className="dropdown-item">
+                                                <LogoutIcon size={20}/> Logout
+                                            </Link>
                                         </div>
                                     </li>
                                 </ul>
@@ -93,4 +101,10 @@ class App extends Component{
     }
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        username : state.LoginSection.username,
+    }
+};
+
+export default connect(mapStateToProps,null)(App);

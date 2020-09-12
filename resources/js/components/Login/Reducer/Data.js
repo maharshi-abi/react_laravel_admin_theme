@@ -1,8 +1,10 @@
 import * as LoginAction from '../Container/LoginController';
 
 const initialStateData = {
+    username : 'Admin',
     isLogin : false,
-    message : ''
+    message : '',
+    status : 'alert alert-danger alert-dismissible show fade',
 };
 
 const Data = (state = initialStateData,action) => {
@@ -11,13 +13,16 @@ const Data = (state = initialStateData,action) => {
         if(action.payload.success) {
             return {
                 ...state,
+                username : action.payload.data.name,
                 isLogin: true,
                 message: action.payload.message,
+                status : 'alert alert-success alert-dismissible show fade',
             }
         }else{
             return {
                 ...state,
                 message: action.payload.message,
+                status : 'alert alert-danger alert-dismissible show fade',
             }
         }
     }
@@ -31,11 +36,13 @@ const Data = (state = initialStateData,action) => {
                 ...state,
                 isLogin: true,
                 message: action.payload.message,
+                status : 'success',
             }
         }else{
             return {
                 ...state,
                 message: action.payload.message,
+                status : 'alert alert-danger alert-dismissible show fade',
             }
         }
     }
@@ -46,11 +53,14 @@ const Data = (state = initialStateData,action) => {
             return {
                 ...state,
                 isLogin: false,
-                message: "Logout Successfully !!"
+                message: "Logout Successfully !!",
+                status : 'alert alert-success alert-dismissible show fade',
             }
         }else{
             return {
-                message: "Logout Successfully !!"
+                ...state,
+                message: "Logout Successfully !!",
+                status : 'alert alert-success alert-dismissible show fade',
             }
         }
 

@@ -7,6 +7,10 @@ import '../../../../public/assets/js/feather-icons/feather.min.js';
 import '../../../../public/assets/js/app.js';
 import * as LoginAction from './Container/LoginController';
 
+const UserIcon = require('react-feather/dist/icons/user').default;
+const LockIcon = require('react-feather/dist/icons/lock').default;
+const NotificationIcon = require('react-feather/dist/icons/alert-triangle').default;
+
 const validEmailRegex = RegExp(
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 );
@@ -61,7 +65,7 @@ class Login extends Component{
             password: this.state.password
         };
 
-        if(validateForm(this.state.errors) && this.state.email != '' && this.state.password != '') {
+        if(validateForm(this.state.errors) && this.state.email !== '' && this.state.password !== '') {
             this.props.SubmitLoginDetail(data);
         }else{
             console.error('Invalid Form');
@@ -69,7 +73,6 @@ class Login extends Component{
     }
 
     componentWillUnmount(){
-        console.log('123');
         let AuthToken = localStorage.getItem('token');
         this.props.checkAuthentication(AuthToken);
         return true;
@@ -102,8 +105,8 @@ class Login extends Component{
                                     <div className="card-body">
 
                                         {errorMessage.length > 0 &&
-                                        <div className="alert alert-danger alert-dismissible show fade">
-                                            {errorMessage}.
+                                        <div className={this.props.errorStatus}>
+                                            <NotificationIcon size={15}/>  {errorMessage}.
                                             <button type="button" className="close" data-dismiss="alert"
                                                     aria-label="Close">
                                                 <span aria-hidden="true">×</span>
@@ -122,7 +125,7 @@ class Login extends Component{
                                                     <input type="text" name={'email'} className="form-control" id="email"
                                                            placeholder="Enter Your Email" onChange={this.onChange} autoComplete={'off'}/>
                                                     <div className="form-control-icon">
-                                                        <i data-feather="user"/>
+                                                        <UserIcon/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -132,7 +135,7 @@ class Login extends Component{
                                                     <input type="password" name={'password'} className="form-control" id="password"
                                                            placeholder="Enter Your Password" onChange={this.onChange} autoComplete={'off'}/>
                                                     <div className="form-control-icon">
-                                                        <i data-feather="lock"/>
+                                                        <LockIcon/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -158,6 +161,7 @@ class Login extends Component{
 const mapStateToProps = state => {
     return {
         isLogin : state.LoginSection.isLogin,
+        errorStatus : state.LoginSection.status,
         message: state.LoginSection.message,
     }
 };

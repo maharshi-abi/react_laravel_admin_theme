@@ -2,7 +2,8 @@ import React ,{Component} from 'react';
 import { Switch } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import LoginModule from '../Login/Login';
-import AdminModule from '../Layout/App';
+import AdminModule from '../Dashboard/Dashboard';
+import UserProfile from '../User/Profile';
 import PrivateRoute from '../RouteConfig/PrivateRoute';
 import PublicRoute from '../RouteConfig/PublicRoute';
 import LogoutModule from '../Layout/Logout/Index';
@@ -15,6 +16,7 @@ class Menu extends Component{
                         <Switch>
                             <PublicRoute restricted={true} path="/" component={LoginModule} exact />
                             <PrivateRoute path="/dashboard" component={AdminModule} exact />
+                            <PrivateRoute path="/profile" component={UserProfile} exact />
                             <PrivateRoute path="/logout" component={LogoutModule} exact />
                         </Switch>
                 </Router>

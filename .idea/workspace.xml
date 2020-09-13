@@ -3,17 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c25a59ba-96af-4e93-9c50-d60d089e8004" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Index.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Layout/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Layout/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Login/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Login/Reducer/Data.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Login/Reducer/Data.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Layout/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Layout/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Layout/Menu.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,7 +13,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
@@ -181,7 +173,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1599865527161</updated>
-      <workItem from="1599865547896" duration="26508000" />
+      <workItem from="1599865547896" duration="26641000" />
+      <workItem from="1599969796954" duration="5261000" />
     </task>
     <servers />
   </component>
@@ -193,7 +186,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

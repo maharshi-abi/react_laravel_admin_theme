@@ -27,6 +27,11 @@
                 document.getElementById('sidebar').classList.remove('active');
             }
         };
+
+        $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+            $(".alert").alert('close');
+        });
+
     </script>
 </body>
 </html>

@@ -18,7 +18,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-    'name', 'email', 'password',
+    'name', 'email', 'password','avatar'
     ];
 
     /**
@@ -58,4 +58,14 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+	public function getAvatarAttribute($value)
+    {
+       if(empty($value)){
+       	return asset('images/avatar.png');
+       }else{
+       	return asset('storage/avatar/'.$value);
+       }
+    }
+
 }

@@ -2,7 +2,6 @@ import React ,{Component} from 'react';
 import { Link } from "react-router-dom";
 import * as LoginAction from "../Login/Container/LoginController";
 import {connect} from "react-redux";
-import avatar from '../../../../public/assets/images/avatar/avatar-s-1.png'
 import '../../../../public/assets/css/bootstrap.css';
 import '../../../../public/assets/vendors/perfect-scrollbar/perfect-scrollbar.css';
 import '../../../../public/assets/css/app.css';
@@ -42,7 +41,7 @@ class TopNav extends Component{
                                 <a href="#" data-toggle="dropdown"
                                    className="nav-link dropdown-toggle nav-link-lg nav-link-user">
                                     <div className="avatar mr-1">
-                                        <img src={avatar} alt={'Admin'}/>
+                                        <img src={this.props.avatar} alt={'Admin'}/>
                                     </div>
                                     <div className="d-none d-md-block d-lg-inline-block">{this.props.username}</div>
                                 </a>
@@ -64,10 +63,11 @@ class TopNav extends Component{
     }
 }
 
-
 const mapStateToProps = state => {
     return {
         username : state.LoginSection.username,
+        email : state.LoginSection.email,
+        avatar : state.LoginSection.avatar,
     }
 };
 

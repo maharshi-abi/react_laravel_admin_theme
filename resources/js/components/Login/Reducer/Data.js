@@ -2,6 +2,8 @@ import * as LoginAction from '../Container/LoginController';
 
 const initialStateData = {
     username : 'Admin',
+    email : '',
+    avatar : '',
     isLogin : false,
     message : '',
     status : 'alert alert-danger alert-dismissible show fade',
@@ -14,7 +16,28 @@ const Data = (state = initialStateData,action) => {
             return {
                 ...state,
                 username : action.payload.data.name,
+                email : action.payload.data.email,
+                avatar : action.payload.data.avatar,
                 isLogin: true,
+                message: action.payload.message,
+                status : 'alert alert-success alert-dismissible show fade',
+            }
+        }else{
+            return {
+                ...state,
+                message: action.payload.message,
+                status : 'alert alert-danger alert-dismissible show fade',
+            }
+        }
+    }
+
+    if(action.type === LoginAction.ADMINUPDATE){
+        if(action.payload.success) {
+            return {
+                ...state,
+                username : action.payload.data.name,
+                email : action.payload.data.email,
+                avatar : action.payload.data.avatar,
                 message: action.payload.message,
                 status : 'alert alert-success alert-dismissible show fade',
             }

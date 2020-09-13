@@ -1,5 +1,6 @@
 export const LOGIN = "LOGIN";
 export const USERDATA = "USER_DATA";
+export const ADMINUPDATE = "ADMIN_UPDATE";
 export const LOGOUT = "LOGOUT";
 
 export const checkAuthentication = (data) => {
@@ -9,6 +10,19 @@ export const checkAuthentication = (data) => {
         request.then(({ data }) => {
             dispatch({
                 type: USERDATA,
+                payload: data
+            });
+        });
+    }
+};
+
+export const updateAdminProfile = (data) => {
+    const request = axios.post('profile',data);
+    return dispatch =>
+    {
+        request.then(({ data }) => {
+            dispatch({
+                type: ADMINUPDATE,
                 payload: data
             });
         });

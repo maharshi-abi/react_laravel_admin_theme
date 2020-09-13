@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use JWTAuth;
 use JWTAuthException;
 
@@ -32,5 +35,47 @@ class APIController extends Controller
         }
         return response()->json($response, 201);
     }
+
+    public function updateProfile(Request $request)
+    {
+        try{
+            $user = JWTAuth::parseToken()->authenticate();
+            $validator = Validator::make($request->all(), [
+                'name' => ['required', 'string', 'min:6','max:20'],
+                'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+            ]);
+
+            if(!empty($request->password)){
+                $validator = Validator::make($request->all(), [
+                    'password' => ['sometimes','required', 'string', 'min:6'],
+                    'password_confirmation' => ['sometimes','required','string', 'min:6','different:password'],
+                ]);
+            }
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'success'    => false,
+                    'message'   => $validator->errors()->first()
+                ]);
+            }
+
+            $user->name = $request->name;
+            $user->email = $request->email;
+
+            if(!empty($request->password_confirmation)){
+                if (!(Hash::check($request->password, $user->password))) {
+                    return response()->json(['success'    => false,'message'   => 'Please enter valid previous password']);
+                }
+                $user->password = Hash::make($request->password_confirmation);
+            }
+            $user->save();
+
+            $response = ['success'=> true,'message' => 'Profile updated !!','data'=> $user];
+        }catch (\Exception $e){
+            $response = ['success'=> false,'message' => '','data'=> $e->getMessage()];
+        }
+        return response()->json($response, 201);
+    }
+
 
 }

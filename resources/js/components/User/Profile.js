@@ -144,38 +144,23 @@ class Profile extends Component{
                     <div id="main">
                         <Navigation/>
                         <div className="main-content container-fluid">
+                            <div className="page-title">
+                                <h4><UserIcon/> Update Profile</h4>
+                                <hr/>
+                            </div>
                             <section id="basic-horizontal-layouts">
                                 <div className="row match-height">
-                                    <div className="col-md-3 col-12">
+                                    <div className="col-md-8 col-12">
                                         <div className="card">
                                             <div className="card-header bg-primary">
-                                                <h4 className="card-title text-white">Image</h4>
+                                                <h4 className="card-title text-white">
+                                                    <div className="avatar avatar-xl mr-3">
+                                                        <img src={this.state.avatar} alt={'Admin'}/>
+                                                    </div>User Profile
+                                                </h4>
                                             </div>
                                             <div className="card-content">
                                                 <div className="card-body">
-                                                    <form className="form form-horizontal">
-                                                        <div className="form-body">
-                                                            <div className="row">
-                                                                <div className="avatar avatar-xl mr-3 col-md-12">
-                                                                    <img src={this.state.avatar} alt={'Admin'}/>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-md-6 col-12">
-                                        <div className="card">
-                                            <div className="card-header bg-primary">
-                                                <h4 className="card-title text-white"><UserIcon/> User Profile</h4>
-                                            </div>
-                                            <div className="card-content">
-                                                <div className="card-body">
-
                                                     {errorMessage.length > 0 &&
                                                     <div className={defaultErrorStatus}>
                                                         <NotificationIcon size={15}/>  {errorMessage}.
@@ -189,6 +174,7 @@ class Profile extends Component{
                                                     <form className="form form-horizontal" onSubmit={this.handleSubmit} encType="multipart/form-data" noValidate>
                                                         <div className="form-body">
                                                             <div className="row">
+
                                                                 <div className="col-md-4">
                                                                     <label>Avatar</label>
                                                                 </div>
@@ -214,6 +200,9 @@ class Profile extends Component{
                                                                            className="form-control" name="email"
                                                                            placeholder="User Email" value={this.state.email} onChange={this.onChange} autoComplete={'off'}/>
                                                                 </div>
+                                                                <div className="col-md-12">
+                                                                    <hr/>
+                                                                </div>
                                                                 <div className="col-md-4">
                                                                     <label>Old Password</label>
                                                                 </div>
@@ -232,9 +221,13 @@ class Profile extends Component{
                                                                            placeholder="Enter new password" onChange={this.onChange} autoComplete={'off'}/>
                                                                 </div>
 
+                                                                <div className="col-md-12">
+                                                                    <hr/>
+                                                                </div>
+
                                                                 <div className="col-sm-12 d-flex justify-content-end">
                                                                     <button type="submit"
-                                                                            className="btn btn-success mr-1 mb-1">Update Profile
+                                                                            className="btn btn-info mr-1 mb-1">Update Profile
                                                                     </button>
                                                                 </div>
                                                             </div>

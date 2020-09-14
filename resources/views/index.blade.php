@@ -12,6 +12,17 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .sidebar-wrapper .sidebar-header img {
+            height: 6.5rem !important;
+        }
+        .sidebar-wrapper .sidebar-header {
+            padding: 1rem 2rem 0rem !important;
+        }
+        #main {
+            background-color: #e6f0fb !important;
+        }
+    </style>
 </head>
 <body>
     <div id="index"></div>

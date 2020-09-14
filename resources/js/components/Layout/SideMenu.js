@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import logo from '../../../../public/assets/images/logo.svg'
+import logo from '../../../../public/assets/images/logo.jpeg'
 const DashboardIcon = require('react-feather/dist/icons/home').default;
 import { Link } from "react-router-dom";
 
@@ -14,7 +14,9 @@ class SideMenu extends Component{
                 <div id="sidebar" className='active'>
                     <div className="sidebar-wrapper active">
                         <div className="sidebar-header">
-                            <img src={logo} alt={"logo"}/>
+                            <Link to='/'>
+                                <img src={logo} alt={"logo"}/>
+                            </Link>
                         </div>
                         <div className="sidebar-menu">
                             <ul className="menu">

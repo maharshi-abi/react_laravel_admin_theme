@@ -19,21 +19,36 @@ const validateForm = errors => {
 class Profile extends Component{
     constructor(props) {
         super(props);
+        this.onFileChange = this.onFileChange.bind(this);
         this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             username: props.username,
             email: props.email,
             avatar: props.avatar,
+            profile: [],
             password: '',
             password_confirmation: '',
-            error_status: '',
             errors: {
                 username: '',
                 email: '',
                 password: '',
             }
         };
+    }
+
+    onFileChange(event) {
+        this.createImage(event.target.files[0]);
+    };
+
+    createImage(file){
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            this.setState({
+                profile: e.target.result,
+            })
+        }
+        reader.readAsDataURL(file);
     }
 
     onChange(event){
@@ -75,11 +90,13 @@ class Profile extends Component{
     handleSubmit(event) {
         event.preventDefault();
         const data = {
+            avatar: this.state.profile,
             name: this.state.username,
             email: this.state.email,
             password: this.state.password,
             password_confirmation: this.state.password_confirmation,
         };
+
         if(validateForm(this.state.errors) && this.state.username !== '' && this.state.email !== '') {
             this.props.updateAdminProfileData(data);
         }else{
@@ -92,8 +109,12 @@ class Profile extends Component{
             username: nextProps.username,
             email: nextProps.email,
             avatar: nextProps.avatar,
-            avatar: nextProps.avatar,
         });
+    }
+
+    componentWillUnmount(){
+        this.props.resetStateValue();
+        return true;
     }
 
     render() {
@@ -165,9 +186,18 @@ class Profile extends Component{
                                                     </div>
                                                     }
 
-                                                    <form className="form form-horizontal" onSubmit={this.handleSubmit} noValidate>
+                                                    <form className="form form-horizontal" onSubmit={this.handleSubmit} encType="multipart/form-data" noValidate>
                                                         <div className="form-body">
                                                             <div className="row">
+                                                                <div className="col-md-4">
+                                                                    <label>Avatar</label>
+                                                                </div>
+                                                                <div className="col-md-8 form-group">
+                                                                    <input type="file"
+                                                                           className="form-control" name="profile" id={'profile'}
+                                                                           onChange={this.onFileChange}/>
+                                                                </div>
+
                                                                 <div className="col-md-4">
                                                                     <label>Name</label>
                                                                 </div>
@@ -240,7 +270,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        updateAdminProfileData: (data) => dispatch(LoginAction.updateAdminProfile(data))
+        updateAdminProfileData: (data) => dispatch(LoginAction.updateAdminProfile(data)),
+        resetStateValue: () => dispatch(LoginAction.resetStateValue())
     };
 };
 

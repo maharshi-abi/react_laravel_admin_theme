@@ -19,12 +19,12 @@ const Data = (state = initialStateData,action) => {
                 email : action.payload.data.email,
                 avatar : action.payload.data.avatar,
                 isLogin: true,
-                message: action.payload.message,
-                status : 'alert alert-success alert-dismissible show fade',
             }
         }else{
+            localStorage.removeItem('token');
             return {
                 ...state,
+                isLogin: false,
                 message: action.payload.message,
                 status : 'alert alert-danger alert-dismissible show fade',
             }
@@ -86,8 +86,16 @@ const Data = (state = initialStateData,action) => {
                 status : 'alert alert-success alert-dismissible show fade',
             }
         }
-
     }
+
+    if(action.type === LoginAction.RESET){
+            return {
+                ...state,
+                message : '',
+                status: '',
+            }
+    }
+
     return state;
 };
 

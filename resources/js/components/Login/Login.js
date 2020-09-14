@@ -6,7 +6,6 @@ import '../../../../public/assets/css/app.css';
 import '../../../../public/assets/js/feather-icons/feather.min.js';
 import '../../../../public/assets/js/app.js';
 import * as LoginAction from './Container/LoginController';
-
 const UserIcon = require('react-feather/dist/icons/user').default;
 const LockIcon = require('react-feather/dist/icons/lock').default;
 const NotificationIcon = require('react-feather/dist/icons/alert-triangle').default;

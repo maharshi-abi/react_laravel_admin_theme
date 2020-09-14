@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use JWTAuth;
 use JWTAuthException;
+use Illuminate\Support\Str;
 
 class APIController extends Controller
 {
@@ -59,6 +61,12 @@ class APIController extends Controller
                 ]);
             }
 
+            if ($request->avatar){
+                $image =  $request->avatar;
+                $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                Storage::disk('public')->putFileAs('avatar', $image,$name);
+                $user->avatar = $name;
+            }
             $user->name = $request->name;
             $user->email = $request->email;
 

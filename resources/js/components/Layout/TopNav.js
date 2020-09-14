@@ -19,6 +19,10 @@ class TopNav extends Component{
     componentDidMount(){
         let AuthToken = localStorage.getItem('token');
         this.props.checkAuthentication(AuthToken);
+    }
+
+    componentWillUnmount(){
+        this.props.resetStateValue();
         return true;
     }
 
@@ -73,7 +77,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        checkAuthentication: (data) => dispatch(LoginAction.checkAuthentication(data))
+        checkAuthentication: (data) => dispatch(LoginAction.checkAuthentication(data)),
+        resetStateValue: () => dispatch(LoginAction.resetStateValue())
     };
 };
 

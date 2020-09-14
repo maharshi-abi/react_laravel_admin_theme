@@ -84380,6 +84380,11 @@ var TopNav = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var AuthToken = localStorage.getItem('token');
       this.props.checkAuthentication(AuthToken);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.resetStateValue();
       return true;
     }
   }, {
@@ -84455,6 +84460,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     checkAuthentication: function checkAuthentication(data) {
       return dispatch(_Login_Container_LoginController__WEBPACK_IMPORTED_MODULE_2__["checkAuthentication"](data));
+    },
+    resetStateValue: function resetStateValue() {
+      return dispatch(_Login_Container_LoginController__WEBPACK_IMPORTED_MODULE_2__["resetStateValue"]());
     }
   };
 };
@@ -84467,20 +84475,23 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 /*!********************************************************************!*\
   !*** ./resources/js/components/Login/Container/LoginController.js ***!
   \********************************************************************/
-/*! exports provided: LOGIN, USERDATA, ADMINUPDATE, LOGOUT, checkAuthentication, updateAdminProfile, submitData, logout */
+/*! exports provided: LOGIN, RESET, USERDATA, ADMINUPDATE, LOGOUT, checkAuthentication, resetStateValue, updateAdminProfile, submitData, logout */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGIN", function() { return LOGIN; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESET", function() { return RESET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USERDATA", function() { return USERDATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADMINUPDATE", function() { return ADMINUPDATE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT", function() { return LOGOUT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkAuthentication", function() { return checkAuthentication; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetStateValue", function() { return resetStateValue; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateAdminProfile", function() { return updateAdminProfile; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "submitData", function() { return submitData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 var LOGIN = "LOGIN";
+var RESET = "RESET";
 var USERDATA = "USER_DATA";
 var ADMINUPDATE = "ADMIN_UPDATE";
 var LOGOUT = "LOGOUT";
@@ -84493,6 +84504,13 @@ var checkAuthentication = function checkAuthentication(data) {
         type: USERDATA,
         payload: data
       });
+    });
+  };
+};
+var resetStateValue = function resetStateValue() {
+  return function (dispatch) {
+    dispatch({
+      type: RESET
     });
   };
 };
@@ -84833,12 +84851,12 @@ var Data = function Data() {
         username: action.payload.data.name,
         email: action.payload.data.email,
         avatar: action.payload.data.avatar,
-        isLogin: true,
-        message: action.payload.message,
-        status: 'alert alert-success alert-dismissible show fade'
+        isLogin: true
       });
     } else {
+      localStorage.removeItem('token');
       return _objectSpread(_objectSpread({}, state), {}, {
+        isLogin: false,
         message: action.payload.message,
         status: 'alert alert-danger alert-dismissible show fade'
       });
@@ -84895,6 +84913,13 @@ var Data = function Data() {
         status: 'alert alert-success alert-dismissible show fade'
       });
     }
+  }
+
+  if (action.type === _Container_LoginController__WEBPACK_IMPORTED_MODULE_0__["RESET"]) {
+    return _objectSpread(_objectSpread({}, state), {}, {
+      message: '',
+      status: ''
+    });
   }
 
   return state;
@@ -85076,15 +85101,16 @@ var Profile = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, Profile);
 
     _this = _super.call(this, props);
+    _this.onFileChange = _this.onFileChange.bind(_assertThisInitialized(_this));
     _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.state = {
       username: props.username,
       email: props.email,
       avatar: props.avatar,
+      profile: [],
       password: '',
       password_confirmation: '',
-      error_status: '',
       errors: {
         username: '',
         email: '',
@@ -85095,6 +85121,26 @@ var Profile = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(Profile, [{
+    key: "onFileChange",
+    value: function onFileChange(event) {
+      this.createImage(event.target.files[0]);
+    }
+  }, {
+    key: "createImage",
+    value: function createImage(file) {
+      var _this2 = this;
+
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        _this2.setState({
+          profile: e.target.result
+        });
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }, {
     key: "onChange",
     value: function onChange(event) {
       event.preventDefault();
@@ -85133,6 +85179,7 @@ var Profile = /*#__PURE__*/function (_Component) {
     value: function handleSubmit(event) {
       event.preventDefault();
       var data = {
+        avatar: this.state.profile,
         name: this.state.username,
         email: this.state.email,
         password: this.state.password,
@@ -85148,11 +85195,17 @@ var Profile = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
-      this.setState(_defineProperty({
+      this.setState({
         username: nextProps.username,
         email: nextProps.email,
         avatar: nextProps.avatar
-      }, "avatar", nextProps.avatar));
+      });
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.resetStateValue();
+      return true;
     }
   }, {
     key: "render",
@@ -85242,12 +85295,23 @@ var Profile = /*#__PURE__*/function (_Component) {
       }, "\xD7"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         className: "form form-horizontal",
         onSubmit: this.handleSubmit,
+        encType: "multipart/form-data",
         noValidate: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-body"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Avatar")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-8 form-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        className: "form-control",
+        name: "profile",
+        id: 'profile',
+        onChange: this.onFileChange
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-4"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Name")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-8 form-group"
@@ -85320,6 +85384,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     updateAdminProfileData: function updateAdminProfileData(data) {
       return dispatch(_Login_Container_LoginController__WEBPACK_IMPORTED_MODULE_4__["updateAdminProfile"](data));
+    },
+    resetStateValue: function resetStateValue() {
+      return dispatch(_Login_Container_LoginController__WEBPACK_IMPORTED_MODULE_4__["resetStateValue"]());
     }
   };
 };

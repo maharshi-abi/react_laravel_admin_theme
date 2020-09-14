@@ -1,4 +1,5 @@
 export const LOGIN = "LOGIN";
+export const RESET = "RESET";
 export const USERDATA = "USER_DATA";
 export const ADMINUPDATE = "ADMIN_UPDATE";
 export const LOGOUT = "LOGOUT";
@@ -12,6 +13,16 @@ export const checkAuthentication = (data) => {
                 type: USERDATA,
                 payload: data
             });
+        });
+    }
+};
+
+
+export const resetStateValue = () => {
+    return dispatch =>
+    {
+        dispatch({
+            type: RESET,
         });
     }
 };

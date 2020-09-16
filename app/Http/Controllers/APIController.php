@@ -16,7 +16,7 @@ class APIController extends Controller
     public function users()
     {
       try{
-        $users = User::all();
+        $users = User::latest()->paginate(5);
         $response = ['success'=>true,'message' => 'user list !!','data'=>$users];
     }catch (\Exception $e){
         return [
@@ -84,6 +84,4 @@ class APIController extends Controller
         }
         return response()->json($response, 201);
     }
-
-
 }

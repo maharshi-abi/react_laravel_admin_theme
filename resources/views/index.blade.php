@@ -13,6 +13,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
+        li.sidebar-item :hover {
+            text-decoration: none;
+        }
+        a.sidebar-link.active {
+            background: #e6f0fb;
+        }
         .sidebar-wrapper .sidebar-header img {
             height: 6.5rem !important;
         }

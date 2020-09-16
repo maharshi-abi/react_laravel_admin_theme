@@ -26,7 +26,8 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
-        "react-feather": "^2.0.8",        
+        "react-feather": "^2.0.8",
+        "react-js-pagination": "^3.0.3",
         "react-redux": "^7.2.1",
         "react-router": "latest",
         "react-router-dom": "^5.2.0",

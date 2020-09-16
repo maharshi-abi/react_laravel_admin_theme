@@ -138,7 +138,7 @@ class Profile extends Component{
             defaultErrorStatus = 'alert alert-danger alert-dismissible show fade';
         }
         return (
-            <div className="DashboardLayout" >
+            <div className="UserLayout" >
                 <div id="app">
                     <SideMenu/>
                     <div id="main">

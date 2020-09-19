@@ -45,9 +45,9 @@ class TopNav extends Component{
                                 <a href="#" data-toggle="dropdown"
                                    className="nav-link dropdown-toggle nav-link-lg nav-link-user">
                                     <div className="avatar mr-1">
-                                        <img src={this.props.avatar} alt={'Admin'}/>
+                                        <img src={this.props.loginAvatar} alt={'Admin'}/>
                                     </div>
-                                    <div className="d-none d-md-block d-lg-inline-block">{this.props.username}</div>
+                                    <div className="d-none d-md-block d-lg-inline-block">{this.props.loginUsername}</div>
                                 </a>
                                 <div className="dropdown-menu dropdown-menu-right">
                                     <Link to="/profile" className="dropdown-item">
@@ -69,9 +69,8 @@ class TopNav extends Component{
 
 const mapStateToProps = state => {
     return {
-        username : state.LoginSection.username,
-        email : state.LoginSection.email,
-        avatar : state.LoginSection.avatar,
+        loginUsername : state.LoginSection.username,
+        loginAvatar : state.LoginSection.avatar,
     }
 };
 

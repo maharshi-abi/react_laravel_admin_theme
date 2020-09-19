@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Exception;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
@@ -16,9 +17,9 @@ class APIController extends Controller
     public function users()
     {
       try{
-        $users = User::latest()->paginate(5);
+        $users = User::paginate(5);
         $response = ['success'=>true,'message' => 'user list !!','data'=>$users];
-    }catch (\Exception $e){
+    }catch (Exception $e){
         return [
         'success'  => false,
         'message'   => $e->getMessage()
@@ -32,7 +33,7 @@ class APIController extends Controller
         try{
             $user = JWTAuth::parseToken()->authenticate();
             $response = ['success'=> true,'message' => 'user profile !!','data'=> $user];
-        }catch (\Exception $e){
+        }catch (Exception $e){
             $response = ['success'=> false,'message' => '','data'=> $e->getMessage()];
         }
         return response()->json($response, 201);
@@ -79,7 +80,7 @@ class APIController extends Controller
             $user->save();
 
             $response = ['success'=> true,'message' => 'Profile updated !!','data'=> $user];
-        }catch (\Exception $e){
+        }catch (Exception $e){
             $response = ['success'=> false,'message' => '','data'=> $e->getMessage()];
         }
         return response()->json($response, 201);

@@ -4,11 +4,11 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import ReactDOM from 'react-dom';
 import LoginModule from './components/Login/Reducer/Data';
+import UserModule from './components/User/UserList/Reducer/UserData';
 import axios from "axios";
 import Header from "./components/Layout/Menu";
 
 let AuthToken = localStorage.getItem('token');
-
 window.axios = axios.create({
     baseURL: 'http://127.0.0.1:8000/api',
     timeout: 10000,
@@ -26,7 +26,8 @@ const enhancer = composeEnhancers(
 );
 
 const rootReducer = combineReducers({
-    LoginSection: LoginModule
+    LoginSection: LoginModule,
+    UserSection: UserModule
 });
 
 const store = createStore(rootReducer, enhancer);

@@ -1,10 +1,11 @@
 import React ,{Component} from 'react';
+import {connect} from "react-redux";
 import SideMenu from "../../Layout/SideMenu";
 import Navigation from "../../Layout/TopNav";
 import Pagination from "react-js-pagination";
 import * as UserAction from "./Container/UserController";
 import UserList from "./UserList";
-import {connect} from "react-redux";
+import { CSVLink } from "react-csv";
 
 const UserIcon = require('react-feather/dist/icons/users').default;
 
@@ -41,14 +42,29 @@ class Index extends Component{
         this.props.userList('?page='+pageNumber);
     }
 
+    handleSearchChange(evt) {
+        if(evt.target.value){
+            this.props.userList('?search='+evt.target.value);
+        }
+    }
+
     render() {
-        let userList,statusMessage;
+        let userList,statusMessage,csvData,headers;
         if(this.state.totalData !== 0) {
             statusMessage = '';
-            userList = this.props.userListData.map((user,key) =>
+            userList = this.state.data.map((user,key) =>
                 <UserList key={key} id={user.id} name={user.name} email={user.email} avatar={user.avatar}/>
             );
+
+            csvData = [
+                ["firstname", "lastname", "email"],
+                ["Ahmed", "Tomi", "ah@smthing.co.com"],
+                ["Raed", "Labes", "rl@smthing.co.com"],
+                ["Yezzi", "Min l3b", "ymin@cocococo.com"]
+            ];
+
         }else{
+            csvData = [];
             statusMessage = <h4 className={'text-center'}>Record not found</h4>;
             userList = [];
         }
@@ -64,12 +80,21 @@ class Index extends Component{
                                 <h4><UserIcon/> User List</h4>
                                 <hr/>
                             </div>
+
                             <section id="basic-horizontal-layouts">
                                 <div className="row" id="table-hover-row">
-                                    <div className="col-12">
+                                    <div className="col-md-12 mr-2 mb-2">
+                                        <div className="float-left">
+                                            <CSVLink data={csvData} className="btn btn-info" filename={"demo_users.csv"} >Download CSV</CSVLink>
+                                        </div>
+                                        <div className="float-right">
+                                            <input className="form-control" placeholder="Search User..." type="text"onChange={this.handleSearchChange.bind(this)}/>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-12">
                                         <div className="card">
                                             <div className="card-content">
-                                                {statusMessage}
+
                                                 <div className="table-responsive">
                                                     <table className="table table-hover table-striped mb-0">
                                                         <thead>
@@ -85,7 +110,7 @@ class Index extends Component{
                                                         </tbody>
                                                     </table>
                                                 </div>
-
+                                                {statusMessage}
                                             </div>
                                         </div>
                                     </div>

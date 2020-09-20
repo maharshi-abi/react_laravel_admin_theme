@@ -21,6 +21,10 @@ class TopNav extends Component{
         this.props.checkAuthentication(AuthToken);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.loginUsername !== undefined;
+    }
+
     componentWillUnmount(){
         this.props.resetStateValue();
         return true;

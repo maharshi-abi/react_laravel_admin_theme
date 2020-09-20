@@ -14,10 +14,16 @@ use Illuminate\Support\Str;
 
 class APIController extends Controller
 {
-    public function users()
+    public function users(Request $request)
     {
       try{
-        $users = User::paginate(5);
+          $getData = $request->all();
+          if(isset($getData['search'])){
+              $users = User::where('name', 'LIKE', '%' . $getData['search'] . '%')->orWhere('email', 'LIKE', '%' . $getData['search'] . '%')->paginate(5);
+          }else{
+              $users = User::paginate(5);
+          }
+
         $response = ['success'=>true,'message' => 'user list !!','data'=>$users];
     }catch (Exception $e){
         return [

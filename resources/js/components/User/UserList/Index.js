@@ -1,5 +1,7 @@
 import React ,{Component} from 'react';
 import {connect} from "react-redux";
+import { Link } from "react-router-dom";
+import swal from 'sweetalert';
 import SideMenu from "../../Layout/SideMenu";
 import Navigation from "../../Layout/TopNav";
 import Pagination from "react-js-pagination";
@@ -12,6 +14,7 @@ const UserIcon = require('react-feather/dist/icons/users').default;
 class Index extends Component{
     constructor(props) {
         super(props);
+        this.removeUserData = this.removeUserData.bind(this);
         this.state = {
             data: [],
             activePage: 1,
@@ -48,20 +51,38 @@ class Index extends Component{
         }
     }
 
+    removeUserData(id){
+
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this user !!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    this.props.removeUserFromId(id);
+                    console.log(id);
+                    swal("User has been deleted!", {icon: "success",});
+                } else {
+                    swal("Your user is safe!");
+                }
+            });
+    }
+
     render() {
-        let userList,statusMessage,csvData,headers;
+        let userList,statusMessage,csvData;
+        let csvheaders = [
+            { label: "Name", key: "name" },
+            { label: "Email", key: "email" },
+        ];
         if(this.state.totalData !== 0) {
             statusMessage = '';
             userList = this.state.data.map((user,key) =>
-                <UserList key={key} id={user.id} name={user.name} email={user.email} avatar={user.avatar}/>
+                <UserList key={key} id={user.id} name={user.name} email={user.email} avatar={user.avatar} removeUserData={this.removeUserData}/>
             );
-
-            csvData = [
-                ["firstname", "lastname", "email"],
-                ["Ahmed", "Tomi", "ah@smthing.co.com"],
-                ["Raed", "Labes", "rl@smthing.co.com"],
-                ["Yezzi", "Min l3b", "ymin@cocococo.com"]
-            ];
+            csvData = this.props.exportData;
 
         }else{
             csvData = [];
@@ -77,7 +98,10 @@ class Index extends Component{
                         <Navigation/>
                         <div className="main-content container-fluid">
                             <div className="page-title">
-                                <h4><UserIcon/> User List</h4>
+                                <h5>
+                                    <UserIcon/> User List ({this.state.totalData})
+                                    <Link to='/' className={'float-right btn btn-info mr-2 mb-2'} >Create User</Link>
+                                </h5>
                                 <hr/>
                             </div>
 
@@ -85,7 +109,7 @@ class Index extends Component{
                                 <div className="row" id="table-hover-row">
                                     <div className="col-md-12 mr-2 mb-2">
                                         <div className="float-left">
-                                            <CSVLink data={csvData} className="btn btn-info" filename={"demo_users.csv"} >Download CSV</CSVLink>
+                                            <CSVLink data={csvData} headers={csvheaders} className={"btn btn-success float-right"} filename={"users.csv"} >Download CSV</CSVLink>
                                         </div>
                                         <div className="float-right">
                                             <input className="form-control" placeholder="Search User..." type="text"onChange={this.handleSearchChange.bind(this)}/>
@@ -99,7 +123,7 @@ class Index extends Component{
                                                     <table className="table table-hover table-striped mb-0">
                                                         <thead>
                                                         <tr>
-                                                            <th>Image</th>
+                                                            <th>Avatar</th>
                                                             <th>Name</th>
                                                             <th>Email</th>
                                                             <th>#</th>
@@ -146,12 +170,14 @@ const mapStateToProps = state => {
         totalData : state.UserSection.totalData,
         userListData : state.UserSection.userList,
         recordList : state.UserSection.recordList,
+        exportData : state.UserSection.exportData,
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         userList: (data) => dispatch(UserAction.userList(data)),
+        removeUserFromId: (data) => dispatch(UserAction.removeUser(data)),
     };
 };
 

@@ -19,12 +19,13 @@ class APIController extends Controller
       try{
           $getData = $request->all();
           if(isset($getData['search'])){
-              $users = User::where('name', 'LIKE', '%' . $getData['search'] . '%')->orWhere('email', 'LIKE', '%' . $getData['search'] . '%')->paginate(5);
+              $users = User::where('name', 'LIKE', '%' . $getData['search'] . '%')->orWhere('email', 'LIKE', '%' . $getData['search'] . '%')->latest()->paginate(5);
           }else{
-              $users = User::paginate(5);
+              $users = User::latest()->paginate(5);
           }
+          $allUser = User::latest()->get();
 
-        $response = ['success'=>true,'message' => 'user list !!','data'=>$users];
+        $response = ['success'=>true,'message' => 'user list !!','data'=>$users,'exportData'=>$allUser];
     }catch (Exception $e){
         return [
         'success'  => false,
@@ -41,6 +42,22 @@ class APIController extends Controller
             $response = ['success'=> true,'message' => 'user profile !!','data'=> $user];
         }catch (Exception $e){
             $response = ['success'=> false,'message' => '','data'=> $e->getMessage()];
+        }
+        return response()->json($response, 201);
+    }
+
+    public function removeUser($id)
+    {
+        try{
+            $user = User::find($id);
+            if($user){
+                $user->delete();
+            }
+            $users = User::latest()->paginate(5);
+            $allUser = User::latest()->get();
+            $response = ['success'=> true,'message' => 'User Deleted !!','data'=>$users,'exportData'=>$allUser];
+        }catch (Exception $e){
+            $response = ['success'=> false,'message' => $e->getMessage(),'data'=> []];
         }
         return response()->json($response, 201);
     }

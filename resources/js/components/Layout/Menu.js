@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import LoginModule from '../Login/Login';
 import AdminModule from '../Dashboard/Dashboard';
@@ -8,6 +8,7 @@ import Users from '../User/UserList/Index';
 import PrivateRoute from '../RouteConfig/PrivateRoute';
 import PublicRoute from '../RouteConfig/PublicRoute';
 import LogoutModule from '../Layout/Logout/Index';
+import ErrorPage from './ErrorPage';
 
 class Menu extends Component{
     render() {
@@ -20,6 +21,10 @@ class Menu extends Component{
                             <PrivateRoute path="/profile" component={UserProfile} exact />
                             <PrivateRoute path="/users" component={Users} exact />
                             <PrivateRoute path="/logout" component={LogoutModule} exact />
+                            <Route path="*" component={ErrorPage} />
+                            <Route path="" component={ErrorPage} />
+                            <Route path="*" component={ErrorPage} />
+                            <Route component={ErrorPage} />
                         </Switch>
                 </Router>
             </div>

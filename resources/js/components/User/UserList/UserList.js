@@ -19,7 +19,7 @@ class UserList extends Component{
                     <td className="font-weight-normal">{this.props.name}</td>
                     <td className="font-weight-normal">{this.props.email}</td>
                     <td>
-                        <UserEditIcon className={'mr-2'}/>
+                        {/*<UserEditIcon className={'mr-2'}/>*/}
                         <a className={'link pointer'} onClick={() => this.props.removeUserData(this.props.id)}>
                             <UserRemoveIcon/>
                         </a>

@@ -100,7 +100,7 @@ class Index extends Component{
                             <div className="page-title">
                                 <h5>
                                     <UserIcon/> User List ({this.state.totalData})
-                                    <Link to='/' className={'float-right btn btn-info mr-2 mb-2'} >Create User</Link>
+                                    {/*<Link to='/' className={'float-right btn btn-info mr-2 mb-2'} >Create User</Link>*/}
                                 </h5>
                                 <hr/>
                             </div>

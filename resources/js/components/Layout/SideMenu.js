@@ -1,5 +1,5 @@
 import React ,{Component} from 'react';
-import logo from '../../../../public/assets/images/favicon.svg'
+import logo from '../../../../public/assets/images/favicon.svg';
 const DashboardIcon = require('react-feather/dist/icons/home').default;
 const UsersIcon = require('react-feather/dist/icons/users').default;
 import { NavLink } from "react-router-dom";

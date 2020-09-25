@@ -1,4 +1,5 @@
 import React ,{Component} from 'react';
+import {Link} from "react-router-dom";
 const UserEditIcon = require('react-feather/dist/icons/edit').default;
 const UserRemoveIcon = require('react-feather/dist/icons/delete').default;
 
@@ -19,7 +20,9 @@ class UserList extends Component{
                     <td className="font-weight-normal">{this.props.name}</td>
                     <td className="font-weight-normal">{this.props.email}</td>
                     <td>
-                        {/*<UserEditIcon className={'mr-2'}/>*/}
+                        <Link to={`/user/update/${this.props.id}`}>
+                            <UserEditIcon className={'mr-2'}/>
+                        </Link>
                         <a className={'link pointer'} onClick={() => this.props.removeUserData(this.props.id)}>
                             <UserRemoveIcon/>
                         </a>

@@ -86,7 +86,7 @@ class Index extends Component{
 
         }else{
             csvData = [];
-            statusMessage = <h4 className={'text-center'}>Record not found</h4>;
+            statusMessage = <h4 className={'text-center'}>Loading .....</h4>;
             userList = [];
         }
 
@@ -100,7 +100,7 @@ class Index extends Component{
                             <div className="page-title">
                                 <h5>
                                     <UserIcon/> User List ({this.state.totalData})
-                                    {/*<Link to='/user/data' className={'float-right btn btn-info mr-2 mb-2'} >Create User</Link>*/}
+                                        <Link to='/user/create' className={'float-right btn btn-primary mr-2 mb-2'} >Create User</Link>
                                 </h5>
                                 <hr/>
                             </div>
@@ -112,7 +112,7 @@ class Index extends Component{
                                             <CSVLink data={csvData} headers={csvheaders} className={"btn btn-success float-right"} filename={"users.csv"} >Download CSV</CSVLink>
                                         </div>
                                         <div className="float-right">
-                                            <input className="form-control" placeholder="Search User..." type="text"onChange={this.handleSearchChange.bind(this)}/>
+                                            <input className="form-control" placeholder="Search User..." type="text" onChange={this.handleSearchChange.bind(this)}/>
                                         </div>
                                     </div>
                                     <div className="col-md-12">

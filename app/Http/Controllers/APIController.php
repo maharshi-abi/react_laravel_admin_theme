@@ -35,10 +35,23 @@ class APIController extends Controller
     return response()->json($response, 201);
 }
 
-    public function profile()
+    public function profile(Request $request)
     {
         try{
             $user = JWTAuth::parseToken()->authenticate();
+            if($request->user_id){ $user = User::find($request->user_id);}
+            $response = ['success'=> true,'message' => 'user profile !!','data'=> $user];
+        }catch (Exception $e){
+            $response = ['success'=> false,'message' => '','data'=> $e->getMessage()];
+        }
+        return response()->json($response, 201);
+    }
+
+    public function viewProfile(Request $request)
+    {
+        try{
+            $user = JWTAuth::parseToken()->authenticate();
+            if($request->user_id){ $user = User::find($request->user_id);}
             $response = ['success'=> true,'message' => 'user profile !!','data'=> $user];
         }catch (Exception $e){
             $response = ['success'=> false,'message' => '','data'=> $e->getMessage()];
@@ -67,7 +80,7 @@ class APIController extends Controller
         try{
             $user = JWTAuth::parseToken()->authenticate();
             $validator = Validator::make($request->all(), [
-                'name' => ['required', 'string', 'min:6','max:20'],
+                'name' => ['required', 'string', 'min:4','max:20'],
                 'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
             ]);
 
@@ -108,4 +121,56 @@ class APIController extends Controller
         }
         return response()->json($response, 201);
     }
+
+    public function createUser(Request $request)
+    {
+        try{
+            $validator = Validator::make($request->all(), [
+                'name' => ['required', 'string', 'min:4','max:20'],
+            ]);
+
+            if($request->update_user){
+                $user = User::find($request->update_user);
+                $avatar = @$user->avatar;
+                $validator = Validator::make($request->all(), [
+                    'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+                ]);
+            }else{
+                $validator = Validator::make($request->all(), [
+                    'email' => ['required', 'email', 'min:6',Rule::unique('users')],
+                ]);
+            }
+
+            if ($validator->fails()) {
+                return response()->json([ 'success' => false, 'message' => $validator->errors()->first() ]);
+            }
+
+            if ($request->avatar && !empty($request->avatar)){
+                $image =  $request->avatar;
+                $avatar = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                Storage::disk('public')->putFileAs('avatar', $image,$avatar);
+            }
+
+            $record = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => \Hash::make($request->email),
+                'avatar' => @$avatar,
+            ];
+
+            if($request->update_user) {
+                User::where('id',$user->id)->update($record);
+                $msg = 'User Updated !!';
+            }else{
+                User::create($record);
+                $msg = 'User Created !!';
+            }
+
+            $response = ['success'=> true,'message' => $msg,'data'=> ''];
+        }catch (Exception $e){
+            $response = ['success'=> false,'message' => '','data'=> $e->getMessage()];
+        }
+        return response()->json($response, 201);
+    }
+
 }

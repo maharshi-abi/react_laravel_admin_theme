@@ -21,6 +21,8 @@ Route::group(['middleware' => 'api-header'], function () {
 Route::group(['middleware' => ['jwt-auth', 'api-header']], function () {
 	Route::get('users/list', 'APIController@users');
     Route::get('profile', 'APIController@profile');
+    Route::get('viewProfile', 'APIController@viewProfile');
     Route::post('profile', 'APIController@updateProfile');
+    Route::post('create/user', 'APIController@createUser');
     Route::get('removeUser/{id}', 'APIController@removeUser');
 });

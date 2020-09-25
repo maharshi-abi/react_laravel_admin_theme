@@ -58,8 +58,8 @@ class Profile extends Component{
         switch (name) {
             case 'username':
                 errors.username =
-                    value.length < 4
-                        ? 'Name must be at least 4 characters long!'
+                    value.length < 6
+                        ? 'Name must be at least 6 characters long!'
                         : '';
                 break;
             case 'email':

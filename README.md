@@ -1,4 +1,7 @@
-<p align="center"><img src="https://www.iihglobal.com/wp-content/uploads/2019/11/laravel-and-reactjs-web-app.png"></p>
+<img src="https://www.iihglobal.com/wp-content/uploads/2019/11/laravel-and-reactjs-web-app.png" width="30%" style="float:left">
+
+## Demo Video
+https://bit.ly/3i4qIUn
 
 ## Laravel 7.28.1 and React 16.2.0
 

@@ -21,7 +21,7 @@
 						},
 						{
 							"key": "password",
-							"value": "12345678",
+							"value": "123456",
 							"type": "text"
 						}
 					]
@@ -93,9 +93,15 @@
 					"formdata": []
 				},
 				"url": {
-					"raw": "{{site_url}}profile",
+					"raw": "{{site_url}}profile?user_id=123",
 					"host": [
 						"{{site_url}}profile"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "123"
+						}
 					]
 				}
 			},
@@ -120,12 +126,117 @@
 					"formdata": []
 				},
 				"url": {
-					"raw": "{{site_url}}users/list",
+					"raw": "{{site_url}}users/list?page=1",
 					"host": [
 						"{{site_url}}users"
 					],
 					"path": [
 						"list"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Profile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "avatar",
+							"type": "file",
+							"src": "/home/maharshi/Desktop/user_images/user_avatar.png"
+						},
+						{
+							"key": "name",
+							"value": "Maharshi2",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "mike01@mailinator.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{site_url}}profile",
+					"host": [
+						"{{site_url}}profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "avatar",
+							"type": "file",
+							"src": "/home/maharshi/Desktop/user_images/vr-next-power-ui_01.jpg",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "Maharshi2",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "mike03@mailinator.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345679",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{site_url}}create/user",
+					"host": [
+						"{{site_url}}create"
+					],
+					"path": [
+						"user"
 					]
 				}
 			},

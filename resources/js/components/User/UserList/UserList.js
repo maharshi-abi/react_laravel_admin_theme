@@ -14,7 +14,7 @@ class UserList extends Component{
                 <tr>
                     <td>
                         <div className="avatar avatar-lg mr-3">
-                            <img src={this.props.avatar} alt="{this.props.name}" />
+                            <img src={this.props.avatar} alt={this.props.name} />
                         </div>
                         </td>
                     <td className="font-weight-normal">{this.props.name}</td>

@@ -6,6 +6,7 @@ import AdminModule from '../Dashboard/Dashboard';
 import UserProfile from '../User/Profile';
 import Users from '../User/UserList/Index';
 import UserForm from '../User/Form/Index';
+import AdminUser from '../Admin/Admin';
 import PrivateRoute from '../RouteConfig/PrivateRoute';
 import PublicRoute from '../RouteConfig/PublicRoute';
 import LogoutModule from '../Layout/Logout/Index';
@@ -24,6 +25,7 @@ class Menu extends Component{
                             <PrivateRoute path="/user/create" component={UserForm} exact />
                             <PrivateRoute path="/user/update/:id" component={props => <UserForm userID=":id" {...props} />} />
                             <PrivateRoute path="/logout" component={LogoutModule} exact />
+                            <PrivateRoute path="/admin" component={AdminUser} exact />
                             <Route path="*" component={ErrorPage} />
                             <Route path="" component={ErrorPage} />
                             <Route path="*" component={ErrorPage} />

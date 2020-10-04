@@ -141,17 +141,17 @@ class Index extends Component{
                                 </div>
 
                                 <nav aria-label="Page navigation example">
-                                <ul className={"pagination pagination-primary  justify-content-center"}>
-                                    <Pagination
-                                        activePage={this.state.activePage}
-                                        itemsCountPerPage={this.state.per_page}
-                                        totalItemsCount={this.state.totalData}
-                                        onChange={this.handlePageChange.bind(this)}
-                                        itemClass="page-item"
-                                        linkClass="page-link"
-                                        pageRangeDisplayed={8}
-                                    />
-                                </ul>
+                                    <ul className={"pagination pagination-primary  justify-content-center"}>
+                                        <Pagination
+                                            activePage={this.state.activePage}
+                                            itemsCountPerPage={this.state.per_page}
+                                            totalItemsCount={this.state.totalData}
+                                            onChange={this.handlePageChange.bind(this)}
+                                            itemClass="page-item"
+                                            linkClass="page-link"
+                                            pageRangeDisplayed={8}
+                                        />
+                                    </ul>
                                 </nav>
                             </section>
                         </div>

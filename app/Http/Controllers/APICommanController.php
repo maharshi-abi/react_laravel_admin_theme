@@ -59,7 +59,7 @@ class APICommanController extends Controller
       ];
     }
 
-    return response()->json($response, 201);
+    return response()->json($response, 200);
   }
 
   public function register(Request $request)

@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use JWTAuth;
 use JWTAuthException;
-use Illuminate\Support\Str;
 
 class APIController extends Controller
 {
@@ -24,15 +23,14 @@ class APIController extends Controller
               $users = User::latest()->paginate(5);
           }
           $allUser = User::latest()->get();
-
-        $response = ['success'=>true,'message' => 'user list !!','data'=>$users,'exportData'=>$allUser];
+          $response = ['success'=>true,'message' => 'user list !!','data'=>$users,'exportData'=>$allUser];
     }catch (Exception $e){
         return [
         'success'  => false,
         'message'   => $e->getMessage()
         ];
     }
-    return response()->json($response, 201);
+    return response()->json($response, 200);
 }
 
     public function profile(Request $request)
@@ -44,7 +42,7 @@ class APIController extends Controller
         }catch (Exception $e){
             $response = ['success'=> false,'message' => '','data'=> $e->getMessage()];
         }
-        return response()->json($response, 201);
+        return response()->json($response, 200);
     }
 
     public function viewProfile(Request $request)
@@ -56,7 +54,7 @@ class APIController extends Controller
         }catch (Exception $e){
             $response = ['success'=> false,'message' => '','data'=> $e->getMessage()];
         }
-        return response()->json($response, 201);
+        return response()->json($response, 200);
     }
 
     public function removeUser($id)
@@ -72,7 +70,7 @@ class APIController extends Controller
         }catch (Exception $e){
             $response = ['success'=> false,'message' => $e->getMessage(),'data'=> []];
         }
-        return response()->json($response, 201);
+        return response()->json($response, 204);
     }
 
     public function updateProfile(Request $request)
@@ -119,7 +117,7 @@ class APIController extends Controller
         }catch (Exception $e){
             $response = ['success'=> false,'message' => '','data'=> $e->getMessage()];
         }
-        return response()->json($response, 201);
+        return response()->json($response, 200);
     }
 
     public function createUser(Request $request)
@@ -131,7 +129,6 @@ class APIController extends Controller
 
             if($request->update_user){
                 $user = User::find($request->update_user);
-                $avatar = @$user->avatar;
                 $validator = Validator::make($request->all(), [
                     'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
                 ]);
@@ -149,14 +146,19 @@ class APIController extends Controller
                 $image =  $request->avatar;
                 $avatar = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 Storage::disk('public')->putFileAs('avatar', $image,$avatar);
+                $record = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => \Hash::make($request->email),
+                    'avatar' => @$avatar,
+                ];
+            }else{
+                $record = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => \Hash::make($request->email),
+                ];
             }
-
-            $record = [
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => \Hash::make($request->email),
-                'avatar' => @$avatar,
-            ];
 
             if($request->update_user) {
                 User::where('id',$user->id)->update($record);
@@ -170,7 +172,7 @@ class APIController extends Controller
         }catch (Exception $e){
             $response = ['success'=> false,'message' => '','data'=> $e->getMessage()];
         }
-        return response()->json($response, 201);
+        return response()->json($response, 200);
     }
 
 }

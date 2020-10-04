@@ -26,6 +26,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "@loadable/component": "^5.13.2",
         "react-csv": "^2.0.3",
         "react-feather": "^2.0.8",
         "react-js-pagination": "^3.0.3",

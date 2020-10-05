@@ -23,8 +23,8 @@ class Index extends Component{
             return <Redirect to={'/'}/>
         }
         return (
-            <div className="logout_section">
-            </div>
+            <React.Fragment>
+            </React.Fragment>
         );
     }
 };

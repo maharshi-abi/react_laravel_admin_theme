@@ -9,7 +9,7 @@ class Dashboard extends Component{
 
     render() {
         return (
-            <div className="DashboardLayout" >
+            <React.Fragment>
                 <div id="app">
                     <SideMenu/>
                     <div id="main">
@@ -32,7 +32,7 @@ class Dashboard extends Component{
                         </div>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

@@ -91,7 +91,7 @@ class Index extends Component{
         }
 
         return (
-            <div className="UserIndexLayout">
+            <React.Fragment>
                 <div id="app">
                     <SideMenu/>
                     <div id="main">
@@ -158,7 +158,7 @@ class Index extends Component{
 
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

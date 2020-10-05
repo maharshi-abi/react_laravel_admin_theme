@@ -138,7 +138,7 @@ class Profile extends Component{
             defaultErrorStatus = 'alert alert-danger alert-dismissible show fade';
         }
         return (
-            <div className="UserLayout" >
+            <React.Fragment>
                 <div id="app">
                     <SideMenu/>
                     <div id="main">
@@ -238,15 +238,12 @@ class Profile extends Component{
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </section>
                         </div>
-
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

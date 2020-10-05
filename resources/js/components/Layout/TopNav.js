@@ -32,7 +32,7 @@ class TopNav extends Component{
 
     render() {
         return (
-            <div className="NavigationSection">
+            <React.Fragment>
                 <nav className="navbar navbar-header navbar-expand navbar-light">
                     <a className="sidebar-toggler" href="#"><span className="navbar-toggler-icon"/></a>
                     <button className="btn navbar-toggler" type="button" data-toggle="collapse"
@@ -66,7 +66,7 @@ class TopNav extends Component{
                         </ul>
                     </div>
                 </nav>
-            </div>
+            </React.Fragment>
         );
     }
 }

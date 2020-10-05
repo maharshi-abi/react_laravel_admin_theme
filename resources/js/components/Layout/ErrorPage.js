@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class ErrorPage extends Component{
     render() {
         return (
-            <div className="ErrorPage">
+            <React.Fragment>
                 <div id="error">
                     <div className="container text-center pt-32">
                         <h1 className='error-title'>404</h1>
@@ -12,7 +12,7 @@ class ErrorPage extends Component{
                         <Link to='/' className={'btn btn-primary'} >Go Home</Link>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 };

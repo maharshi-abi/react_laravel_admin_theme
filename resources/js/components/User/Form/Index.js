@@ -129,7 +129,7 @@ class Index extends Component{
             defaultErrorStatus = 'alert alert-danger alert-dismissible show fade';
         }
         return (
-            <div className="UserSaveLayout" >
+            <React.Fragment>
                 <div id="app">
                     <SideMenu/>
                     <div id="main">
@@ -210,10 +210,9 @@ class Index extends Component{
                                 </div>
                             </section>
                         </div>
-
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

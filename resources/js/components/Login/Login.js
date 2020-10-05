@@ -95,7 +95,7 @@ class Login extends Component{
         }
 
         return (
-            <div className="Login">
+            <React.Fragment>
                 <div id="auth">
                     <div className="container">
                         <div className="row">
@@ -152,7 +152,7 @@ class Login extends Component{
                     </div>
 
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

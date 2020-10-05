@@ -15,7 +15,7 @@ import ErrorPage from './ErrorPage';
 class Menu extends Component{
     render() {
         return (
-            <div className="route_section">
+            <React.Fragment>
                 <Router>
                         <Switch>
                             <PublicRoute restricted={true} path="/" component={LoginModule} exact />
@@ -32,7 +32,7 @@ class Menu extends Component{
                             <Route component={ErrorPage} />
                         </Switch>
                 </Router>
-            </div>
+            </React.Fragment>
         );
     }
 };

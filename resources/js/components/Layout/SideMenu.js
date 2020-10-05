@@ -12,9 +12,8 @@ class SideMenu extends Component{
     }
 
     render() {
-
         return (
-            <div className="SideMenuSection">
+            <React.Fragment>
                 <div id="sidebar" className='active'>
                     <div className="sidebar-wrapper active">
                         <div className="sidebar-header">
@@ -51,7 +50,7 @@ class SideMenu extends Component{
                         <button className="sidebar-toggler btn x"><i data-feather="x"/></button>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }

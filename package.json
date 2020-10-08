@@ -29,6 +29,7 @@
         "@loadable/component": "^5.13.2",
         "react-csv": "^2.0.3",
         "react-feather": "^2.0.8",
+        "react-helmet": "^6.1.0",
         "react-js-pagination": "^3.0.3",
         "react-redux": "^7.2.1",
         "react-router": "latest",

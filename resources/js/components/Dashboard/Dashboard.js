@@ -1,6 +1,7 @@
 import React ,{Component} from 'react';
 import SideMenu from "../Layout/SideMenu";
 import Navigation from "../Layout/TopNav";
+import {Helmet} from "react-helmet";
 
 class Dashboard extends Component{
     constructor(props) {
@@ -10,6 +11,10 @@ class Dashboard extends Component{
     render() {
         return (
             <React.Fragment>
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>ABI || Admin Panel</title>
+                </Helmet>
                 <div id="app">
                     <SideMenu/>
                     <div id="main">

@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     public function run()
     {
     	
-        for ($i=0; $i < 1000; $i++) {
+        for ($i=0; $i < 100; $i++) {
             $userData[] = [
                 'name' => Str::random(8),
                 'email' => Str::random(10).'@system.com',

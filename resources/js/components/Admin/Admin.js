@@ -14,8 +14,7 @@ export default function Admin(props) {
     const [csvData, setCsvData] = useState([]);
     const [activePage, setActivePage] = useState(1);
 
-    const getUserList = async (data) => {
-        console.log(data);
+    const getUserList = async (data) => {        
         let link;
         if(data === 1 || typeof(data) === 'undefined'){
             link = 'users/list';
